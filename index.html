@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFinder - Find Your Dream Job</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">RefugeeJobFinder</div>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-section="jobs">Jobs</a></li>
+                <li><a href="#" class="nav-link" data-section="companies">Companies</a></li>
+                <li><a href="#" class="nav-link" data-section="about">About</a></li>
+                <li><a href="#" class="nav-link" data-section="contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section-content">
+            <section class="hero">
+                <div class="container">
+                    <h1>Find Your Dream Job</h1>
+                    <p>Discover thousands of job opportunities from top companies worldwide</p>
+                </div>
+            </section>
+
+            <div class="container">
+                <section class="search-section">
+                    <form class="search-form" id="searchForm">
+                        <div class="form-group">
+                            <label for="jobTitle">Job Title</label>
+                            <input type="text" id="jobTitle" placeholder="e.g. Software Engineer, Marketing Manager">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" placeholder="e.g. New York, Remote">
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" placeholder="e.g. Google, Microsoft">
+                        </div>
+                        <button type="submit" class="search-btn">Search Jobs</button>
+                    </form>
+                </section>
+
+                <section class="filters">
+                    <div class="filter-grid">
+                        <div class="filter-group">
+                            <label for="jobType">Job Type</label>
+                            <select id="jobType">
+                                <option value="">All Types</option>
+                                <option value="full-time">Full Time</option>
+                                <option value="part-time">Part Time</option>
+                                <option value="contract">Contract</option>
+                                <option value="freelance">Freelance</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="experience">Experience Level</label>
+                            <select id="experience">
+                                <option value="">All Levels</option>
+                                <option value="entry">Entry Level</option>
+                                <option value="mid">Mid Level</option>
+                                <option value="senior">Senior Level</option>
+                                <option value="executive">Executive</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="salary">Salary Range</label>
+                            <select id="salary">
+                                <option value="">Any Salary</option>
+                                <option value="0-50k">$0 - $50k</option>
+                                <option value="50k-100k">$50k - $100k</option>
+                                <option value="100k-150k">$100k - $150k</option>
+                                <option value="150k+">$150k+</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="remote">Work Type</label>
+                            <select id="remote">
+                                <option value="">All</option>
+                                <option value="remote">Remote</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="onsite">On-site</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="jobs-section">
+                    <div class="section-header">
+                        <h2>Latest Job Opportunities</h2>
+                        <span class="results-count" id="resultsCount">Showing 8 jobs</span>
+                    </div>
+
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p>Searching for jobs...</p>
+                    </div>
+
+                    <div class="no-results" id="noResults">
+                        <h3>No jobs found</h3>
+                        <p>Try adjusting your search criteria or filters</p>
+                    </div>
+
+                    <div id="jobsList">
+                        <!-- Job listings will be populated by JavaScript -->
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Jobs Section -->
+        <section id="jobs" class="section-content section-hidden">
+            <div class="container">
+                <section class="page-section">
+                    <h2>Browse All Jobs</h2>
+                    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Find the perfect job that matches your skills and experience</p>
+                    
+                    <div class="filters">
+                        <div class="filter-grid">
+                            <div class="filter-group">
+                                <label for="jobs-jobType">Job Type</label>
+                                <select id="jobs-jobType">
+                                    <option value="">All Types</option>
+                                    <option value="full-time">Full Time</option>
+                                    <option value="part-time">Part Time</option>
+                                    <option value="contract">Contract</option>
+                                    <option value="freelance">Freelance</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="jobs-experience">Experience Level</label>
+                                <select id="jobs-experience">
+                                    <option value="">All Levels</option>
+                                    <option value="entry">Entry Level</option>
+                                    <option value="mid">Mid Level</option>
+                                    <option value="senior">Senior Level</option>
+                                    <option value="executive">Executive</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="jobs-salary">Salary Range</label>
+                                <select id="jobs-salary">
+                                    <option value="">Any Salary</option>
+                                    <option value="0-50k">$0 - $50k</option>
+                                    <option value="50k-100k">$50k - $100k</option>
+                                    <option value="100k-150k">$100k - $150k</option>
+                                    <option value="150k+">$150k+</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="jobs-remote">Work Type</label>
+                                <select id="jobs-remote">
+                                    <option value="">All</option>
+                                    <option value="remote">Remote</option>
+                                    <option value="hybrid">Hybrid</option>
+                                    <option value="onsite">On-site</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="jobs-section">
+                        <div class="section-header">
+                            <h3>All Available Jobs</h3>
+                            <span class="results-count" id="jobsResultsCount">Showing 8 jobs</span>
+                        </div>
+
+                        <div class="loading" id="jobsLoading">
+                            <div class="spinner"></div>
+                            <p>Loading jobs...</p>
+                        </div>
+
+                        <div class="no-results" id="jobsNoResults">
+                            <h3>No jobs found</h3>
+                            <p>Try adjusting your search criteria or filters</p>
+                        </div>
+
+                        <div id="allJobsList">
+                            <!-- All job listings will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Companies Section -->
+        <section id="companies" class="section-content section-hidden">
+            <div class="container">
+                <section class="page-section">
+                    <h2>Top Companies Hiring</h2>
+                    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Explore opportunities at leading companies in your field</p>
+                    
+                    <div class="companies-grid" id="companiesList">
+                        <div class="company-card">
+                            <img src="https://via.placeholder.com/100" alt="TechCorp Inc." class="company-logo">
+                            <h3 class="company-name">TechCorp Inc.</h3>
+                            <p class="company-industry">Technology</p>
+                            <div class="company-meta">
+                                <span>📍 San Francisco</span>
+                                <span>💼 120 Jobs</span>
+                            </div>
+                            <button class="view-jobs-btn">View Jobs</button>
+                        </div>
+                        
+                        <div class="company-card">
+                            <img src="https://via.placeholder.com/100" alt="Design Studio" class="company-logo">
+                            <h3 class="company-name">Design Studio</h3>
+                            <p class="company-industry">Design & Creative</p>
+                            <div class="company-meta">
+                                <span>📍 Los Angeles</span>
+                                <span>💼 45 Jobs</span>
+                            </div>
+                            <button class="view-jobs-btn">View Jobs</button>
+                        </div>
+                        
+                        <div class="company-card">
+                            <img src="https://via.placeholder.com/100" alt="AI Solutions Ltd." class="company-logo">
+                            <h3 class="company-name">AI Solutions Ltd.</h3>
+                            <p class="company-industry">Artificial Intelligence</p>
+                            <div class="company-meta">
+                                <span>📍 Boston</span>
+                                <span>💼 32 Jobs</span>
+                            </div>
+                            <button class="view-jobs-btn">View Jobs</button>
+                        </div>
+                        
+                        <div class="company-card">
+                            <img src="https://via.placeholder.com/100" alt="CloudTech Systems" class="company-logo">
+                            <h3 class="company-name">CloudTech Systems</h3>
+                            <p class="company-industry">Cloud Computing</p>
+                            <div class="company-meta">
+                                <span>📍 Seattle</span>
+                                <span>💼 28 Jobs</span>
+                            </div>
+                            <button class="view-jobs-btn">View Jobs</button>
+                        </div>
+                        
+                        <div class="company-card">
+                            <img src="https://via.placeholder.com/100" alt="Global Marketing Co." class="company-logo">
+                            <h3 class="company-name">Global Marketing Co.</h3>
+                            <p class="company-industry">Marketing & Advertising</p>
+                            <div class="company-meta">
+                                <span>📍 Chicago</span>
+                                <span>💼 56 Jobs</span>
+                            </div>
+                            <button class="view-jobs-btn">View Jobs</button>
+                        </div>
+                        
+                        <div class="company-card">
+                            <img src="https://via.placeholder.com/100" alt="SalesForce Pro" class="company-logo">
+                            <h3 class="company-name">SalesForce Pro</h3>
+                            <p class="company-industry">Sales & Business</p>
+                            <div class="company-meta">
+                                <span>📍 Miami</span>
+                                <span>💼 18 Jobs</span>
+                            </div>
+                            <button class="view-jobs-btn">View Jobs</button>
+                        </div>
+                        
+                        <div class="company-card">
+                            <img src="https://via.placeholder.com/100" alt="StartupXYZ" class="company-logo">
+                            <h3 class="company-name">StartupXYZ</h3>
+                            <p class="company-industry">Startups</p>
+                            <div class="company-meta">
+                                <span>📍 New York</span>
+                                <span>💼 24 Jobs</span>
+                            </div>
+                            <button class="view-jobs-btn">View Jobs</button>
+                        </div>
+                        
+                        <div class="company-card">
+                            <img src="https://via.placeholder.com/100" alt="CodeCraft LLC" class="company-logo">
+                            <h3 class="company-name">CodeCraft LLC</h3>
+                            <p class="company-industry">Software Development</p>
+                            <div class="company-meta">
+                                <span>📍 Austin</span>
+                                <span>💼 15 Jobs</span>
+                            </div>
+                            <button class="view-jobs-btn">View Jobs</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section-content section-hidden">
+            <div class="container">
+                <section class="page-section">
+                    <h2>About JobFinder</h2>
+                    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Connecting talented professionals with great companies since 2015</p>
+                    
+                    <div class="about-content">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Our Team" class="about-image">
+                        </div>
+                        <div class="about-text">
+                            <h3>Our Mission</h3>
+                            <p>At JobFinder, we believe that everyone deserves to find meaningful work that aligns with their skills, passions, and lifestyle. Our mission is to bridge the gap between talented professionals and companies that value their expertise.</p>
+                            
+                            <h3>What We Do</h3>
+                            <p>We've developed a powerful job search platform that uses advanced matching algorithms to connect job seekers with the most relevant opportunities. Our technology analyzes skills, experience, and preferences to deliver personalized job recommendations.</p>
+                            
+                            <h3>Why Choose Us</h3>
+                            <p>With over 10,000 successful placements and partnerships with top companies worldwide, JobFinder has established itself as a trusted platform in the recruitment industry. We go beyond traditional job boards by offering career resources, interview preparation, and personalized coaching.</p>
+                        </div>
+                    </div>
+                    
+                    <h3 style="text-align: center; margin-top: 4rem;">Meet Our Team</h3>
+                    
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah Johnson" class="member-photo">
+                            <h4 class="member-name">Sarah Johnson</h4>
+                            <p class="member-position">CEO & Founder</p>
+                            <p class="member-bio">With 15 years in the recruitment industry, Sarah founded JobFinder to revolutionize how people find jobs and companies find talent.</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="team-member">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" class="member-photo">
+                            <h4 class="member-name">Michael Chen</h4>
+                            <p class="member-position">CTO</p>
+                            <p class="member-bio">Michael leads our technology team, ensuring our platform delivers the best possible experience for both job seekers and employers.</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="team-member">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Emma Rodriguez" class="member-photo">
+                            <h4 class="member-name">Emma Rodriguez</h4>
+                            <p class="member-position">Head of Partnerships</p>
+                            <p class="member-bio">Emma builds relationships with top companies to bring exclusive job opportunities to our platform.</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="team-member">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David Kim" class="member-photo">
+                            <h4 class="member-name">David Kim</h4>
+                            <p class="member-position">Product Manager</p>
+                            <p class="member-bio">David oversees product development, constantly improving our platform based on user feedback.</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section-content section-hidden">
+            <div class="container">
+                <section class="page-section">
+                    <h2>Contact Us</h2>
+                    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Have questions? Get in touch with our team</p>
+                    
+                    <div class="contact-container">
+                        <div class="contact-info">
+                            <h3>Contact Information</h3>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Our Office</h4>
+                                    <p>123 Job Street, Suite 500<br>San Francisco, CA 94107</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Phone</h4>
+                                    <p><a href="tel:+18005551234">+1 (800) 555-1234</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Email</h4>
+                                    <p><a href="mailto:info@jobfinder.com">info@jobfinder.com</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Business Hours</h4>
+                                    <p>Monday - Friday: 9am - 6pm<br>Saturday: 10am - 4pm<br>Sunday: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-form">
+                            <h3>Send Us a Message</h3>
+                            <form id="contactForm">
+                                <div class="form-row">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" id="name" required>
+                                </div>
+                                <div class="form-row">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" required>
+                                </div>
+                                <div class="form-row">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" id="subject" required>
+                                </div>
+                                <div class="form-row">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" required></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
